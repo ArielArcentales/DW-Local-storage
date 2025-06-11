@@ -42,6 +42,7 @@ function mostrarContactos() {
         card.innerHTML = `
             <strong>${c.nombre}</strong><br>
             ${c.correo} - ${c.telefono}<br>
+            <button onclick="editarContacto(${i})">Editar</button>
             <button onclick="eliminarContacto(${i})">Eliminar</button>
         `;
         lista.appendChild(card);
@@ -55,12 +56,23 @@ function eliminarContacto(index) {
     mostrarContactos(); 
 }
 
+function editarContacto(index) {
+    let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+    let contacto = contactos[index];
+
+    document.getElementById("nombre").value = contacto.nombre;
+    document.getElementById("correo").value = contacto.correo;
+    document.getElementById("telefono").value = contacto.telefono;
+
+    editIndex = index; 
+}
+
 
 mostrarContactos();
 
 
-//elimianar contactos
-//ordenar los contactos alfabeticamente mediante el nombre
-//añadir validaciones: nombre (minimo 2 caracteres)- telefono (no se admiten letras)  
-//editar un contacto
+//elimianar contactos (ok)
+//ordenar los contactos alfabeticamente mediante el nombre (ok)
+//añadir validaciones: nombre (minimo 2 caracteres)- telefono (no se admiten letras)  (ok)
+//editar un contacto (ok)
 //mostrar de 5, 10 o 15 contactos
