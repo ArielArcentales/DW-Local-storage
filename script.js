@@ -33,11 +33,12 @@ form.addEventListener("submit", (e) => {
 
 function mostrarContactos() {
     let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+    let cantidad = parseInt(document.getElementById("cantidad").value) || 10;
 
     contactos.sort((a, b) => a.nombre.localeCompare(b.nombre));
     lista.innerHTML = "";
 
-    contactos.forEach((c, i) => {
+    contactos.slice(0, cantidad).forEach((c, i) => {
         const card = document.createElement("div");
         card.innerHTML = `
             <strong>${c.nombre}</strong><br>
@@ -48,6 +49,8 @@ function mostrarContactos() {
         lista.appendChild(card);
     });
 }
+document.getElementById("cantidad").addEventListener("change", mostrarContactos);
+
 
 function eliminarContacto(index) {
     let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
@@ -75,4 +78,4 @@ mostrarContactos();
 //ordenar los contactos alfabeticamente mediante el nombre (ok)
 //añadir validaciones: nombre (minimo 2 caracteres)- telefono (no se admiten letras)  (ok)
 //editar un contacto (ok)
-//mostrar de 5, 10 o 15 contactos
+//mostrar de 5, 10 o 15 contactos 
